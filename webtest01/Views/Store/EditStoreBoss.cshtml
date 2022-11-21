@@ -1,0 +1,104 @@
+﻿@using webtest01.Models
+@model IQueryable<Store>
+@{
+    ViewBag.Title = "EditStoreBoss";
+}
+@*頭像的圓圈class吃不到 不知原因*@
+<section class="vh-60" style="background-color: #eee; margin:10px;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">修改基本資料</p>
+                                @using (Ajax.BeginForm("EditStoreBoss", "Store", new { id = Model.FirstOrDefault().StoreID }, new AjaxOptions { HttpMethod = "Post", OnComplete = "Success", OnFailure = "Fail" }, new { @class = "mx-1 mx-md-4", enctype = "multipart/form-data" }))
+                                {
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="email" id="Email" class="form-control" disabled readonly />
+                                            <label class="form-label" for="form3Example3c">電子郵件</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="own_name" class="form-control" />
+                                            <label class="form-label" for="form3Example1c">負責人</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="email" id="Phone" class="form-control" />
+                                            <label class="form-label" for="form3Example3c">聯絡電話</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                        <button type="button" class="btn btn-primary btn-lg">儲存修改</button>
+                                    </div>
+
+
+                                    @*<input type="text" class="l-username form-control border-2 py-3" id="Login_StoreEmail" name="Login_StoreEmail" placeholder="請輸入電子郵件" />
+                                    <input type="password" class="l-password form-control border-2 py-3" id="Login_StorePwd" name="Login_StorePwd" placeholder="請輸入密碼" />
+                                    <button type="submit" class="btn-42" style="margin-top: 25px;"><span>登入</span></button>*@
+                                }
+
+                            </div>
+                            @*<div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <img src="https://xsgames.co/randomusers/avatar.php?g=female" class="storeimg" width="250px" height="250px" id="boss">
+                                <input type="file" id="uploadBossPhoto" accept="image/gif, image/jpeg, image/png">
+                                <i class="fa fa-camera fa-3x photoicon memo" aria-hidden="true"></i>
+                                <h4>Hi~ Joanne, 歡迎回來</h4>
+                            </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/Scripts/projectJS/mainForeditStoreBoss.js"></script>
+
+    <script>
+        function Success(e) {
+            if (e.responseJSON.ErrMsg) {
+                alert(e.responseJSON.ErrMsg);
+                return;
+            }
+            alert(e.responseJSON.ResultMsg);
+            //這邊之後要改店主自己的資料頁面
+            if (e.responseJSON.relogin == "relogin") {
+                window.location.href = '@Url.Content("~/Home/Index")';
+            }
+            //這邊之後要改店主自己的資料頁面
+            window.location.href = '@Url.Content("~/Home/Index")';
+            @*console.log(e.responseJSON.ResultMsg);
+            console.log("@Url.Action("Index","Home")");
+            window.location.href="@Url.Action("Index","Home")";*@
+            //location.href = "~/Home/Index.cshtml";
+        }
+        function Fail(e) {
+            alert("狀態碼: " + e.status + ",說明:" + e.statusText);
+        }
+    </script>
+
+
+}
+
+@section css{
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+}

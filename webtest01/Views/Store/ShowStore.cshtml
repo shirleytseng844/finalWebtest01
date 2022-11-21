@@ -1,0 +1,296 @@
+﻿@using webtest01.Models
+@model IQueryable<StoreInfo.ClickStoreCardOut>
+@{
+    ViewBag.Title = "ShowStore";
+}
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-sm-baseline">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="position-relative overflow-hidden p-5 pe-0">
+                    @*店家資料*@
+                    <div id="storeInfo">
+                        <h1 class="mb-4">店家資訊</h1>
+                        <p class="mb-4">店名：@Model.FirstOrDefault().Store_Name</p>
+                        <p class="mb-4">評價：<span>5.0</span> <i class="fas fa-star fa-1x"></i></p>
+                        <p class="mb-4">簡介：@Model.FirstOrDefault().Introduce</p>
+                        <p class="mb-4">連絡電話：@Model.FirstOrDefault().Phone</p>
+                        <p class="mb-4">本日營業時間：14:00-18:00</p>
+                        <p class="mb-4" id="address"></p>
+                        @Html.ActionLink("點 我 看 菜 單", "Product_Customer", "Product", new { id = Model.FirstOrDefault().storeID }, new { @class = "btn btn-primary py-3 px-5" })
+
+
+                        <p></p>
+                        <a href="@Model.FirstOrDefault().Picture" target="_blank"><img src="@Model.FirstOrDefault().Picture" width="200px" height="160"></a>
+
+                    </div>
+                </div>
+                <div id="mapDiv" style="width: 400px;height:600px">
+
+                    @*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1YtLrkHwfU4J4WO3kvrEMnfbSW7szSUQ&ehbc=2E312F" width="600" height="400"></iframe>*@
+                </div>
+            </div>
+            @*評論*@
+            <div class="col-lg-6 wow fadeIn position-relative" data-wow-delay="0.5s">
+                <div>
+                    <h1 class="mb-4">餐車評價</h1>
+                    <i class="fa fa-user-circle-o fa-3x membericon" aria-hidden="true"></i>
+                    <span class="memo">Joanne，歡迎留下您寶貴的意見</span><br>
+                    <div class="st1">
+                        <div>
+                            <img id="star1" src="~/Content/imgs/star.gif" width="30px" height="30px" />
+                            <img id="star2" src="~/Content/imgs/star.gif" width="30px" height="30px" />
+                            <img id="star3" src="~/Content/imgs/star.gif" width="30px" height="30px" />
+                            <img id="star4" src="~/Content/imgs/star.gif" width="30px" height="30px" />
+                            <img id="star5" src="~/Content/imgs/star.gif" width="30px" height="30px" />
+                            <span id="spid" class="memo"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <p></p>
+                        <textarea name="" id="comment_text" cols="50" rows="5"></textarea><br>
+                        <p></p>
+                        <form action="/somewhere/to/upload" enctype="multipart/form-data">
+                            <input type="file" id="uploadFile" accept="image/gif, image/jpeg, image/png" />
+                            <div id="preview_progressbarTW_imgs" style="width:100%; height: 150px; overflow:auto;">
+                                <p>上傳相關圖片</p>
+                                <p></p>
+                                <img src="" id="CommentPhoto" />
+                            </div>
+                        </form>
+                        <input type="button" class="btn btn-outline-secondary" onclick="Register()" value="送出" style="float: right;"><br>
+                    </div>
+                    <hr>
+                    <div>
+                        <h3 class="mb-4">
+                            雞蛋糕 目前有 @ViewBag.commentcount 則評論
+                        </h3>
+                        @foreach (var item in ViewBag.comment)
+                        {
+
+                            <div>
+                                <i class="fa fa-user-circle-o fa-3x membericon" aria-hidden="true"></i>
+                                <span class="memo">@item.CustomerName</span>
+                                @*<p>於 @item.time 評論</p>*@
+                                <div>
+                                    <span class="memo">評分 @item.Star_Rating <i class="fas fa-star fa-1x"></i></span>
+                                </div>
+                                <p>@item.Text_Content</p>
+                                <a href="@item.Picture"><img src="@item.Picture" width="100px" height="70px"></a>
+                            </div>
+                            <hr>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Store Info End-->
+@section scripts{
+    <script>
+
+        //提交評論
+        let uploadfile;
+        function upfile() {
+            uploadfile = document.getElementById('uploadFile').files[0];
+            let readFile = new FileReader();
+            readFile.readAsDataURL(uploadfile);
+            readFile.addEventListener('load', function () {
+                let image = document.getElementById('CommentPhoto');
+                image.src = readFile.result;
+                image.style.maxWidth = "150px";
+                image.style.maxHeight = "150px";
+             })
+        }
+        function doFirst() {
+            // 跟 HTML 畫面產生關連，再建事件聆聽功能
+            document.getElementById('uploadFile').onchange = upfile;
+        }
+        window.addEventListener('load', doFirst);
+
+        function Register() {
+                /*let CustomerID = 1;  -->有登入才有評論，待cookies資料*/
+            let comment_text = $('#comment_text').val();
+            let StoreID = @Model.FirstOrDefault().storeID;
+
+            if (comment_text == "") {
+
+                alert("評論欄不可空白");
+            } else {
+                    const formData = new FormData();
+                    formData.append("comment_text", comment_text);
+                    formData.append("StoreID", StoreID);
+                    /*formData.append("CustomerID", CustomerID);*/
+
+                    if (uploadfile != undefined) {
+
+                        formData.append("imageFile", uploadfile);
+
+                        $.ajax({
+                            url: '@Url.Content("~/Customer/comment")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert("123");
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            url: '@Url.Content("~/Customer/comment")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert(err.responseText + ',' + err.status);
+                            }
+                        });
+                    }
+            }
+        }
+        //放置google地圖
+        var map,geocoder,LatLng;
+        function initMap() {
+        geocoder = new google.maps.Geocoder();
+        LagLng = new google.maps.LatLng(@Model.FirstOrDefault().longitude,@Model.FirstOrDefault().latitude);
+        //建構地圖+中心marker
+        var mapOptions = {
+            center: LagLng,
+            zoom: 16,
+        };
+        var mapElement = document.getElementById("mapDiv");
+        map = new google.maps.Map(mapElement, mapOptions);
+        let marker = new google.maps.Marker({
+            position: LagLng,
+            map: map
+        });
+        //經緯度轉地址
+        geocoder.geocode(
+            { 'latLng': LagLng }, function (results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                    alert(results[0]);
+                    if (results) {
+                        var adress = document.getElementById("address");
+                        adress.innerHTML = results[0].formatted_address;
+                    }
+                } else {
+                    alert("Reverse Geocoding failed because:" + status);
+                }
+            })
+        };
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwN3sIzkE7XzC27vb0oupWfmzCDKYb-uM&callback=initMap"></script>
+
+}
+
+
+@*@section scripts{
+
+        <script>
+
+        以下google地圖完成
+            var map, geocoder,LatLng;
+        function initMap() {
+            geocoder = new google.maps.Geocoder();
+            LagLng = new google.maps.LatLng(@Model.FirstOrDefault().longitude,@Model.FirstOrDefault().latitude);
+            //建構地圖+中心marker
+            var mapOptions = {
+                center: LagLng,
+                zoom: 16,
+            };
+            var mapElement = document.getElementById("mapDiv");
+            map = new google.maps.Map(mapElement, mapOptions);
+            let marker = new google.maps.Marker({
+                position: LagLng,
+                map: map
+            });
+            //經緯度轉地址
+            geocoder.geocode(
+                { 'latLng': LagLng }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK) {
+                        alert(results[0]);
+                        if (results) {
+                            var adress = document.getElementById("address");
+                            adress.innerHTML = results[0].formatted_address;
+                        }
+                    } else {
+                        alert("Reverse Geocoding failed because:" + status);
+                    }
+                })
+            };
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwN3sIzkE7XzC27vb0oupWfmzCDKYb-uM&callback=initMap"></script>
+
+    }*@
+
+
+
+
+@*<h2>ShowStore</h2>
+    <div id="VuePage">
+        <input type="text" id="ID" v-model="form.ID" />
+        <button type="button" v-on:click="Doreturn">送出</button>
+        <p>@Html.ActionLink("檢視產品", "Product_Store", "Store")</p>
+    </div>*@
+
+@*@section scripts{
+        <script>
+        var Vuepage = new Vue({
+            el: '#VuePage',
+            data: function () {
+                var data = { form: {} };
+                return data;
+            },
+            methods: {
+                Doreturn: function () {
+
+                    var self = this;
+                    var postData = {};
+                    alert(self.form.ID);
+                    if (self.form.ID != "") {
+                        postData['StoreID'] = self.form.ID;
+                        $.ajax({
+                            url: '@Url.Content("~/Store/ShowStoreInfo_page")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { inModel: postData },
+                            success: function (datas) {
+                                if (datas == null) {
+                                    alert("無資料");
+                                    return;
+                                }
+                                console.log(datas);
+                            }, error: function (err) {
+                                alert("無反應");
+                            }
+                            })
+                    }
+                }
+            }
+        })
+
+        </script>
+
+
+    }*@

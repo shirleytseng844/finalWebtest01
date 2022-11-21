@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "MyFavorite";
+}
+
+@*  使用者已登入 模板更改     
+    <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <!-- Spinner End -->
+
+
+    <!-- Navbar Start -->
+
+    <div class="container-fluid nav-bar bg-transparent">
+        <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+            <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                <div class="icon p-2 me-2">
+                    <img class="img-fluid" src="imgs/logo.png" alt="Icon" style="width: 100px; height: 100px;">
+                </div>
+                <h1 class="m-0 text-primary">餐車噗噗</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">關於我們</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="motivation.html#motivation" class="dropdown-item">發展動機</a>
+                            <a href="motivation.html#culture" class="dropdown-item">餐車文化</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">熱搜排行</a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="#" class="dropdown-item">地區</a>
+                            <a href="#" class="dropdown-item">食物分類</a>
+                            <a href="#" class="dropdown-item">營業時間</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true"></i></a>
+                        <div class="dropdown-menu rounded-0 m-0">
+                            <a href="./editMember.html" class="dropdown-item">個人資料管理</a>
+                            <a href="./myFavorite.html" class="dropdown-item">我的最愛</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </nav>
+    </div>*@
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-12">
+                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                    <h1 class="mb-3">我的最愛</h1>
+                </div>
+                <div class="card mb-3" style="max-width: 75%;margin: auto;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="./imgs/cake.jpeg" class="rounded-start myfavimg">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="rounded position-absolute start-90 top-0 m-4 py-1 px-3" id="">
+                                    <i class="fa fa-heart fa-2x heart" style="color:#f26835"></i>
+                                </div>
+                                <h5 class="card-title">快樂雞蛋糕</h5>
+                                <p class="card-text"><span class="score">評分5<i class="fas fa-star fa-1x score"></i></span></p>
+                                <p class="card-text">今日營業時間：</p>
+                                <p class="card-text">今日營業地點：</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

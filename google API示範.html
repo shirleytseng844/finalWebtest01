@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <div id="mapDiv" style="height: 600px; width: 400px; ;">
+
+   </div>
+   <div id="address">
+
+   </div>
+<script>
+var map, geocoder, popup;
+function initMap() {
+    geocoder = new google.maps.Geocoder();
+    var mapOptions = {
+        center: new google.maps.LatLng(25.033708,121.564899),
+        zoom: 16,
+    };
+    var mapElement = document.getElementById("mapDiv");
+    map = new google.maps.Map(mapElement, mapOptions);
+    geocoder.geocode({'latLng':new google.maps.LatLng(25.0439892, 121.5212213)},function(results, status){
+        if (status === google.maps.GeocoderStatus.OK) {
+                console.log(results[0]);
+                if (results) {
+                    var adress = document.getElementById("address");
+                    adress.innerHTML = results[0].formatted_address;
+                    
+                }
+            } else {
+                alert("Reverse Geocoding failed because:" + status);
+            }
+    })
+    geocoder.geocode({
+        'latLng': new google.maps.LatLng(25.033708,121.564899), function(results, status) {
+            
+        }
+    })
+}
+</script> 
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap"></script>
+</body>
+</html>
+<!-- //var map;
+//function initMap() {
+//    alert(document.getElementById('mapDiv'));
+//    var latlng = new google.maps.LatLng(25.033708,121.564899);
+//    map = new google.maps.Map(document.getElementById('mapDiv'), {
+//        zoom: 15,
+//        center: { lat: 40.731, lng: -73.997 },
+//    });
+//} -->
+

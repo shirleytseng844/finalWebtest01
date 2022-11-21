@@ -1,0 +1,569 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="trytryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="CalendarID" />
+          </Key>
+          <Property Name="CalendarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Planday" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email_Account" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Local" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Road" Type="nvarchar" MaxLength="50" />
+          <Property Name="Created_At" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Customer_Favorite">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="FavoriteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Message_Board">
+          <Key>
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="MessageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StoreID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Text_Content" Type="nvarchar" MaxLength="200" />
+          <Property Name="Star_Rating" Type="int" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="StoreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Store_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Store_Class" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Area" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Local" Type="nvarchar" MaxLength="50" />
+          <Property Name="Introduce" Type="nvarchar" MaxLength="50" />
+          <Property Name="Owner_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email_Account" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="Creation_At" Type="date" />
+          <Property Name="Picture" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Store_Business">
+          <Key>
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CalendarID" />
+          </Key>
+          <Property Name="StoreID" Type="int" Nullable="false" />
+          <Property Name="CalendarID" Type="int" Nullable="false" />
+          <Property Name="longitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="latitude" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_City" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address_Local" Type="nvarchar" MaxLength="50" />
+          <Property Name="Store_Address" Type="nvarchar" MaxLength="50" />
+          <Property Name="Punch_day" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="Punch_Start" Type="nvarchar" MaxLength="50" />
+          <Property Name="Punch_End" Type="nvarchar" MaxLength="50" />
+          <Property Name="OnBusiness" Type="bit" />
+        </EntityType>
+        <EntityType Name="Store_Products">
+          <Key>
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="StoreID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Product_Price" Type="int" />
+          <Property Name="Product_Picture" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Customer_Favorite_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_Favorite" Type="Self.Customer_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_Favorite">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Favorite_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Customer_Favorite" Type="Self.Customer_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Customer_Favorite">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Board_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Message_Board" Type="Self.Message_Board" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Message_Board">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Board_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Message_Board" Type="Self.Message_Board" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Message_Board">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Business_Calendar">
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="1" />
+          <End Role="Store_Business" Type="Self.Store_Business" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendar">
+              <PropertyRef Name="CalendarID" />
+            </Principal>
+            <Dependent Role="Store_Business">
+              <PropertyRef Name="CalendarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Business_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Store_Business" Type="Self.Store_Business" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Store_Business">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Products_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Store_Products" Type="Self.Store_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Store_Products">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="trytryModelStoreContainer">
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer_Favorite" EntityType="Self.Customer_Favorite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message_Board" EntityType="Self.Message_Board" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store_Business" EntityType="Self.Store_Business" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store_Products" EntityType="Self.Store_Products" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customer_Favorite_Customer" Association="Self.FK_Customer_Favorite_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_Favorite" EntitySet="Customer_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Favorite_Store" Association="Self.FK_Customer_Favorite_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Customer_Favorite" EntitySet="Customer_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Board_Customer" Association="Self.FK_Message_Board_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Message_Board" EntitySet="Message_Board" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Board_Store" Association="Self.FK_Message_Board_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Message_Board" EntitySet="Message_Board" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Business_Calendar" Association="Self.FK_Store_Business_Calendar">
+            <End Role="Calendar" EntitySet="Calendar" />
+            <End Role="Store_Business" EntitySet="Store_Business" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Business_Store" Association="Self.FK_Store_Business_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Store_Business" EntitySet="Store_Business" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Products_Store" Association="Self.FK_Store_Products_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Store_Products" EntitySet="Store_Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="trytryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="CalendarID" />
+          </Key>
+          <Property Name="CalendarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Planday" Type="Int32" />
+          <NavigationProperty Name="Store_Business" Relationship="Self.FK_Store_Business_Calendar" FromRole="Calendar" ToRole="Store_Business" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Road" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Created_At" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer_Favorite" Relationship="Self.FK_Customer_Favorite_Customer" FromRole="Customer" ToRole="Customer_Favorite" />
+          <NavigationProperty Name="Message_Board" Relationship="Self.FK_Message_Board_Customer" FromRole="Customer" ToRole="Message_Board" />
+        </EntityType>
+        <EntityType Name="Customer_Favorite">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+            <PropertyRef Name="CustomerID" />
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="FavoriteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Customer_Favorite_Customer" FromRole="Customer_Favorite" ToRole="Customer" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Customer_Favorite_Store" FromRole="Customer_Favorite" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Message_Board">
+          <Key>
+            <PropertyRef Name="MessageID" />
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="MessageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Text_Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Star_Rating" Type="Int32" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Message_Board_Customer" FromRole="Message_Board" ToRole="Customer" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Message_Board_Store" FromRole="Message_Board" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="StoreID" />
+          </Key>
+          <Property Name="StoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Store_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Area" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Introduce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Owner_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email_Account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Creation_At" Type="DateTime" Precision="0" />
+          <Property Name="Picture" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Customer_Favorite" Relationship="Self.FK_Customer_Favorite_Store" FromRole="Store" ToRole="Customer_Favorite" />
+          <NavigationProperty Name="Message_Board" Relationship="Self.FK_Message_Board_Store" FromRole="Store" ToRole="Message_Board" />
+          <NavigationProperty Name="Store_Business" Relationship="Self.FK_Store_Business_Store" FromRole="Store" ToRole="Store_Business" />
+          <NavigationProperty Name="Store_Products" Relationship="Self.FK_Store_Products_Store" FromRole="Store" ToRole="Store_Products" />
+        </EntityType>
+        <EntityType Name="Store_Business">
+          <Key>
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="CalendarID" />
+          </Key>
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="CalendarID" Type="Int32" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address_Local" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Store_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Punch_day" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Punch_Start" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Punch_End" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OnBusiness" Type="Boolean" />
+          <NavigationProperty Name="Calendar" Relationship="Self.FK_Store_Business_Calendar" FromRole="Store_Business" ToRole="Calendar" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Store_Business_Store" FromRole="Store_Business" ToRole="Store" />
+        </EntityType>
+        <EntityType Name="Store_Products">
+          <Key>
+            <PropertyRef Name="StoreID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="StoreID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Product_Price" Type="Int32" />
+          <Property Name="Product_Picture" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Store_Products_Store" FromRole="Store_Products" ToRole="Store" />
+        </EntityType>
+        <Association Name="FK_Store_Business_Calendar">
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="1" />
+          <End Role="Store_Business" Type="Self.Store_Business" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendar">
+              <PropertyRef Name="CalendarID" />
+            </Principal>
+            <Dependent Role="Store_Business">
+              <PropertyRef Name="CalendarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Favorite_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Customer_Favorite" Type="Self.Customer_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Customer_Favorite">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Board_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Message_Board" Type="Self.Message_Board" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Message_Board">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Favorite_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Customer_Favorite" Type="Self.Customer_Favorite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Customer_Favorite">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Board_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Message_Board" Type="Self.Message_Board" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Message_Board">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Business_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Store_Business" Type="Self.Store_Business" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Store_Business">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Store_Products_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="Store_Products" Type="Self.Store_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="StoreID" />
+            </Principal>
+            <Dependent Role="Store_Products">
+              <PropertyRef Name="StoreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="trytryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+          <EntitySet Name="Customer_Favorite" EntityType="Self.Customer_Favorite" />
+          <EntitySet Name="Message_Board" EntityType="Self.Message_Board" />
+          <EntitySet Name="Store" EntityType="Self.Store" />
+          <EntitySet Name="Store_Business" EntityType="Self.Store_Business" />
+          <EntitySet Name="Store_Products" EntityType="Self.Store_Products" />
+          <AssociationSet Name="FK_Store_Business_Calendar" Association="Self.FK_Store_Business_Calendar">
+            <End Role="Calendar" EntitySet="Calendar" />
+            <End Role="Store_Business" EntitySet="Store_Business" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Favorite_Customer" Association="Self.FK_Customer_Favorite_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Customer_Favorite" EntitySet="Customer_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Board_Customer" Association="Self.FK_Message_Board_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Message_Board" EntitySet="Message_Board" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Favorite_Store" Association="Self.FK_Customer_Favorite_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Customer_Favorite" EntitySet="Customer_Favorite" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Board_Store" Association="Self.FK_Message_Board_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Message_Board" EntitySet="Message_Board" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Business_Store" Association="Self.FK_Store_Business_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Store_Business" EntitySet="Store_Business" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Store_Products_Store" Association="Self.FK_Store_Products_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Store_Products" EntitySet="Store_Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="trytryModelStoreContainer" CdmEntityContainer="trytryEntities">
+          <EntitySetMapping Name="Calendar">
+            <EntityTypeMapping TypeName="trytryModel.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="CalendarID" ColumnName="CalendarID" />
+                <ScalarProperty Name="Planday" ColumnName="Planday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="trytryModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email_Account" ColumnName="Email_Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Local" ColumnName="Address_Local" />
+                <ScalarProperty Name="Address_Road" ColumnName="Address_Road" />
+                <ScalarProperty Name="Created_At" ColumnName="Created_At" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer_Favorite">
+            <EntityTypeMapping TypeName="trytryModel.Customer_Favorite">
+              <MappingFragment StoreEntitySet="Customer_Favorite">
+                <ScalarProperty Name="FavoriteID" ColumnName="FavoriteID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Message_Board">
+            <EntityTypeMapping TypeName="trytryModel.Message_Board">
+              <MappingFragment StoreEntitySet="Message_Board">
+                <ScalarProperty Name="MessageID" ColumnName="MessageID" />
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Text_Content" ColumnName="Text_Content" />
+                <ScalarProperty Name="Star_Rating" ColumnName="Star_Rating" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store">
+            <EntityTypeMapping TypeName="trytryModel.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="Store_Name" ColumnName="Store_Name" />
+                <ScalarProperty Name="Store_Class" ColumnName="Store_Class" />
+                <ScalarProperty Name="Address_Area" ColumnName="Address_Area" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Local" ColumnName="Address_Local" />
+                <ScalarProperty Name="Introduce" ColumnName="Introduce" />
+                <ScalarProperty Name="Owner_Name" ColumnName="Owner_Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email_Account" ColumnName="Email_Account" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Creation_At" ColumnName="Creation_At" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Business">
+            <EntityTypeMapping TypeName="trytryModel.Store_Business">
+              <MappingFragment StoreEntitySet="Store_Business">
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="CalendarID" ColumnName="CalendarID" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_Local" ColumnName="Address_Local" />
+                <ScalarProperty Name="Store_Address" ColumnName="Store_Address" />
+                <ScalarProperty Name="Punch_day" ColumnName="Punch_day" />
+                <ScalarProperty Name="Punch_Start" ColumnName="Punch_Start" />
+                <ScalarProperty Name="Punch_End" ColumnName="Punch_End" />
+                <ScalarProperty Name="OnBusiness" ColumnName="OnBusiness" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Store_Products">
+            <EntityTypeMapping TypeName="trytryModel.Store_Products">
+              <MappingFragment StoreEntitySet="Store_Products">
+                <ScalarProperty Name="StoreID" ColumnName="StoreID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_Price" ColumnName="Product_Price" />
+                <ScalarProperty Name="Product_Picture" ColumnName="Product_Picture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

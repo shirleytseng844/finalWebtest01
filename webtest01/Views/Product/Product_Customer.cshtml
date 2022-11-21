@@ -1,0 +1,44 @@
+﻿@using webtest01.Models
+@model IQueryable<webtest01.Models.Store_Products>
+
+
+@{
+    ViewBag.Title = "Product_Customer";
+}
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                    <h1 class="mb-3">快樂雞蛋糕菜單</h1>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4">
+
+                    @foreach(var item in Model)
+                        {
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden">
+                                    <div class="position-relative overflow-hidden">
+                                        <img class="menuimg" src="@item.Product_Picture" alt="">
+                                    </div>
+                                    <div class="p-4 pb-0">
+                                        <a class="d-block h5 mb-2" >產品：@item.Product_Name</a>
+                                        <div class="d-block h5 mb-2"><i class="fa fa-usd fa-1x" aria-hidden="true"></i>價格：@item.Product_Price</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    <div class="col-12 text-center">
+                        @Html.ActionLink("返回上一頁", "ShowStore","Store",new { id = Model.FirstOrDefault().StoreID },new { @class = "btn btn-primary py-3 px-5" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

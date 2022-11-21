@@ -1,0 +1,195 @@
+﻿@using webtest01.Models
+@model IQueryable<Store>
+@{
+    ViewBag.Title = "EditCarInfo";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+@*此處因以登入 所以會員處顯示不一樣，不適用模板 記得改*@
+
+
+
+<section class="vh-60" style="background-color: #eee; margin:10px;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-12 col-xl-11">
+                <div class="card text-black" style="border-radius: 25px;">
+                    <div class="card-body p-md-5">
+                        <div class="row justify-content-center">
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">修改餐車資料</p>
+
+                                <form class="mx-1 mx-md-4">
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-truck fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="CarName" class="form-control" value="@Model.FirstOrDefault().Store_Name"/>
+                                            <label class="form-label" for="form3Example1c">餐車名稱</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-truck fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+
+                                            <select class="form-select border-3" style="margin-bottom:10px;">
+                                                <option>請選擇營業時間</option>
+                                                <option>6:00-12:00</option>
+                                                <option>12:00-18:00</option>
+                                                <option>18:00-24:00</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-map-marker fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <div id="twzipcode"></div>
+                                            <p></p>
+                                            <input type="text" id="address" class="form-control" />
+                                        </div>
+                                    </div>
+
+                                    <textarea name="desc" id="Introduce" cols="45" rows="5" value="@Model.FirstOrDefault().Introduce"></textarea>
+                                    <label class="form-label" for="form3Example1c">餐車簡介</label>
+
+                                    @*<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="button" class="btn btn-primary btn-lg">儲存修改</button>
+                                        </div>*@
+
+                                </form>
+
+                            </div>
+                            <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">修改圖片</p>
+                                <img id="CarPhoto" src="@Model.FirstOrDefault().Picture" width="100px" height="70px">
+                                <p></p>
+                                <div>
+                                    <form action="/somewhere/to/upload" enctype="multipart/form-data">
+                                        <input type="file" id="uploadFile" accept="image/gif, image/jpeg, image/png" />
+                                        <div id="carsPhoto_imgs" style="width:100%; height: 150px; overflow:auto;">
+                                            <p>上傳攤位照片</p>
+                                        </div>
+                                    </form>
+                                    <input type="button" class="btn btn-outline-secondary" onclick="Register()" value="送出" style="float: right;"><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts{
+    <script src="~/Scripts/projectJS/mainForeditCarInfo.js"></script>
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+    <script src="~/Scripts/jquery.twzipcode.min.js"></script>
+    <script src="~/Scripts/twzipcode.js"></script>
+    <script>
+        $('#twzipcode').twzipcode({
+            'zipcodeIntoDistrict': true,
+            'countySel': '@Model.FirstOrDefault().Address_City',
+            'districtSel': '@Model.FirstOrDefault().Address_Area',
+            'css': [
+                'form-select border-3',
+                'form-select border-3'
+            ]
+
+        });
+        /*$("input[name='zipcode']").attr("readonly, true");*/
+        let uploadfile;
+
+        function upfile() {
+            uploadfile = document.getElementById('uploadFile').files[0];
+            let readFile = new FileReader();
+            readFile.readAsDataURL(uploadfile);
+            readFile.addEventListener('load', function () {
+                let image = document.getElementById('CarPhoto');
+                image.src = readFile.result;
+                image.style.maxWidth = "200px";
+                image.style.maxHeight = "200px";
+             })
+        }
+        function doFirst() {
+            // 跟 HTML 畫面產生關連，再建事件聆聽功能
+            document.getElementById('uploadFile').onchange = upfile;
+
+        }
+        window.addEventListener('load', doFirst);
+
+
+
+
+        function Register() {
+            let CarName = $('#CarName').val();
+            let county = $("select[name='county']").val();
+            let district = $("select[name='district']").val();
+            let address = $('#address').val();
+            let Introduce = $('#Introduce').val();
+
+            if (CarName == "" || county == "" || address == "") {
+
+                alert("請填入完整資料/輸入欄不可空白");
+            } else {
+
+                const formData = new FormData();
+                formData.append("StoreID", @Model.FirstOrDefault().StoreID);
+                    formData.append("CarName", CarName,);
+                    formData.append("county", county);
+                    formData.append("district", district);
+                    formData.append("address", address);
+                    formData.append("Introduce", Introduce);
+
+                    if (uploadfile != undefined) {
+
+                        formData.append("imageFile", uploadfile);
+
+                        $.ajax({
+                            url: '@Url.Content("~/Store/EditCarInfo")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert(err.responseText + ',' + err.status);
+                            }
+                        });
+
+
+                    } else {
+                        $.ajax({
+                            url: '@Url.Content("~/Store/EditCarInfo")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert(err.responseText + ',' + err.status);
+                            }
+                        });
+                    }
+            }
+        }
+    </script>
+}

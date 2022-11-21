@@ -1,0 +1,1216 @@
+/********** Template CSS **********/
+:root {
+    --primary: #f2b705;
+    --secondary: #f2b441;
+    --light: #fffff;
+    --dark: #8c5c03;
+}
+
+.back-to-top {
+    position: fixed;
+    display: none;
+    right: 45px;
+    bottom: 45px;
+    z-index: 99;
+}
+
+
+/*** Spinner ***/
+#spinner {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    z-index: 99999;
+}
+
+#spinner.show {
+    transition: opacity .5s ease-out, visibility 0s linear 0s;
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/*** Button ***/
+.btn {
+    transition: .5s;
+}
+
+.btn.btn-primary,
+.btn.btn-secondary {
+    color: #FFFFFF;
+}
+
+.btn-square {
+    width: 38px;
+    height: 38px;
+}
+
+.btn-sm-square {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-lg-square {
+    width: 48px;
+    height: 48px;
+}
+
+.btn-square,
+.btn-sm-square,
+.btn-lg-square {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: normal;
+    border-radius: 50px;
+}
+
+
+/*** Navbar ***/
+.nav-bar {
+    position: relative;
+    margin-top: 45px;
+    padding: 0 3rem;
+    transition: .5s;
+    z-index: 9999;
+}
+
+.nav-bar.sticky-top {
+    position: sticky;
+    padding: 0;
+    z-index: 9999;
+}
+
+.navbar {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .08);
+}
+
+.navbar .dropdown-toggle::after {
+    border: none;
+    content: "\f107";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    vertical-align: middle;
+    margin-left: 5px;
+    transition: .5s;
+}
+
+.navbar .dropdown-toggle[aria-expanded=true]::after {
+    transform: rotate(-180deg);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    margin-right: 30px;
+    padding: 25px 0;
+    color: #FFFFFF;
+    font-size: 15px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+    color: var(--primary);
+}
+
+@media (max-width: 991.98px) {
+    .nav-bar {
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar-light .navbar-nav .nav-link  {
+        margin-right: 0;
+        padding: 10px 0;
+    }
+
+    .navbar-light .navbar-nav {
+        border-top: 1px solid #EEEEEE;
+    }
+}
+
+.navbar-light .navbar-brand {
+    height: 75px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: var(--dark);
+    font-weight: 500;
+}
+
+@media (min-width: 992px) {
+    .navbar .nav-item .dropdown-menu {
+        display: block;
+        top: 100%;
+        margin-top: 0;
+        transform: rotateX(-75deg);
+        transform-origin: 0% 0%;
+        opacity: 0;
+        visibility: hidden;
+        transition: .5s;
+        
+    }
+
+    .navbar .nav-item:hover .dropdown-menu {
+        transform: rotateX(0deg);
+        visibility: visible;
+        transition: .5s;
+        opacity: 1;
+    }
+}
+
+
+/*** Header ***/
+@media (min-width: 992px) {
+    .header {
+        margin-top: -120px;
+    }
+}
+
+.header-carousel .owl-nav {
+    position: absolute;
+    top: 50%;
+    left: -25px;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+}
+
+.header-carousel .owl-nav .owl-prev,
+.header-carousel .owl-nav .owl-next {
+    margin: 7px 0;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: var(--primary);
+    border-radius: 40px;
+    font-size: 20px;
+    transition: .5s;
+}
+
+.header-carousel .owl-nav .owl-prev:hover,
+.header-carousel .owl-nav .owl-next:hover {
+    background: var(--dark);
+}
+
+@media (max-width: 768px) {
+    .header-carousel .owl-nav {
+        left: 25px;
+    }
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: #DDDDDD;
+}
+
+
+/*** Icon ***/
+.icon {
+    padding: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFFFFF !important;
+    border-radius: 50px; 
+    /* border: 1px dashed var(--primary) !important; */
+}
+
+
+/*** About ***/
+.about-img img {
+    position: relative;
+    z-index: 2;
+}
+
+.about-img::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transform: skew(20deg);
+    z-index: 1;
+}
+
+
+/*** Category ***/
+.cat-item div {
+    background: #FFFFFF;
+    border: 1px dashed rgba(0, 185, 142, .3);
+    transition: .5s;
+}
+
+.cat-item:hover div {
+    background: var(--primary);
+    border-color: transparent;
+}
+
+.cat-item div * {
+    transition: .5s;
+}
+
+.cat-item:hover div * {
+    color: #FFFFFF !important;
+}
+
+
+/*** Property List ***/
+.nav-pills .nav-item .btn {
+    color: var(--dark);
+}
+
+.nav-pills .nav-item .btn:hover,
+.nav-pills .nav-item .btn.active {
+    color: #FFFFFF;
+}
+
+.property-item {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .08);
+}
+
+.property-item img {
+    transition: .5s;
+}
+
+.property-item:hover img {
+    transform: scale(1.1);
+}
+
+.property-item .border-top {
+    border-top: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+.property-item .border-end {
+    border-right: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+
+/*** Team ***/
+.team-item {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .08);
+    transition: .5s;
+}
+
+.team-item .btn {
+    color: var(--primary);
+    background: #FFFFFF;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .15);
+}
+
+.team-item .btn:hover {
+    color: #FFFFFF;
+    background: var(--primary);
+}
+
+.team-item:hover {
+    border-color: var(--secondary) !important;
+}
+
+.team-item:hover .bg-primary {
+    background: var(--secondary) !important;
+}
+
+.team-item:hover .bg-primary i {
+    color: var(--secondary) !important;
+}
+
+
+/*** Testimonial ***/
+.testimonial-carousel {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+@media (min-width: 576px) {
+    .testimonial-carousel {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+}
+
+.testimonial-carousel .testimonial-item .border {
+    border: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+.testimonial-carousel .owl-nav {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: calc(50% - 20px);
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1;
+}
+
+.testimonial-carousel .owl-nav .owl-prev,
+.testimonial-carousel .owl-nav .owl-next {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    background: var(--primary);
+    border-radius: 40px;
+    font-size: 20px;
+    transition: .5s;
+}
+
+.testimonial-carousel .owl-nav .owl-prev:hover,
+.testimonial-carousel .owl-nav .owl-next:hover {
+    background: var(--dark);
+}
+
+
+/*** Footer ***/
+.footer .btn.btn-social {
+    margin-right: 5px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--light);
+    border: 1px solid rgba(255,255,255,0.5);
+    border-radius: 35px;
+    transition: .3s;
+}
+
+.footer .btn.btn-social:hover {
+    color: var(--primary);
+    border-color: var(--light);
+}
+
+.footer .btn.btn-link {
+    display: block;
+    margin-bottom: 5px;
+    padding: 0;
+    text-align: left;
+    font-size: 15px;
+    font-weight: normal;
+    text-transform: capitalize;
+    transition: .3s;
+}
+
+.footer .btn.btn-link::before {
+    position: relative;
+    content: "\f105";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.footer .btn.btn-link:hover {
+    letter-spacing: 1px;
+    box-shadow: none;
+}
+
+.footer .form-control {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.footer .copyright {
+    padding: 25px 0;
+    font-size: 15px;
+    border-top: 1px solid rgba(256, 256, 256, .1);
+}
+
+.footer .copyright a {
+    color: var(--light);
+}
+
+.footer .footer-menu a {
+    margin-right: 15px;
+    padding-right: 15px;
+    border-right: 1px solid rgba(255, 255, 255, .1);
+}
+
+.footer .footer-menu a:last-child {
+    margin-right: 0;
+    padding-right: 0;
+    border-right: none;
+}
+
+.login-wrap .icon{
+    width: 80px;
+    height: 80px;
+    background: #8d448b;
+    border-radius: 50%;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    color: #f2b441;
+}
+
+.memo {
+    /* border: 1px solid #f26835; */
+    font-weight: bolder;
+    color: #f26835;
+    padding: 10px;
+}
+
+.membericon {
+    float: left;
+    color:#f2b441;
+}
+
+/* 登入口button */
+.btn-40,
+.btn-40 *,
+.btn-40 :after,
+.btn-40 :before,
+.btn-40:after,
+.btn-40:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-40 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #f2b705;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+.btn-40:disabled {
+  cursor: default;
+}
+.btn-40:-moz-focusring {
+  outline: auto;
+}
+.btn-40 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-40 [hidden] {
+  display: none;
+}
+.btn-40 {
+  border: 1px solid;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 2rem 5rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-40 .new,
+.btn-40 .old {
+  transition: transform 0.2s;
+}
+.btn-40 .old {
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+}
+.btn-40:hover .old {
+  transform: translateY(100%);
+}
+.btn-40 .new {
+  background: #fff;
+  color: #000;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-100%);
+}
+.btn-40:hover .new {
+  transform: translateX(0);
+}
+/* 登入口button */
+
+
+/*登入介面 圖片*/
+.box{
+    width: 180px;
+    height: 180px;
+    background: #aaa;
+  }
+  .cover-fit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+
+  .box{
+    width: 180px;
+    height: 180px;
+    background: #aaa;
+    overflow: hidden;
+    margin: 20px;
+  }
+  img{
+    transition: .5s;
+  }
+  .box:hover img{
+    transform: scale(1.2);
+  }
+  .cover-fit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+/*登入介面 圖片*/
+
+
+/*登入介面 button*/
+.btn-42,
+.btn-42 *,
+.btn-42 :after,
+.btn-42 :before,
+.btn-42:after,
+.btn-42:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-42 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #f2b705;
+  background-image: none;
+  color: #f2b705;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+.btn-42:disabled {
+  cursor: default;
+}
+.btn-42:-moz-focusring {
+  outline: auto;
+}
+.btn-42 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-42 [hidden] {
+  display: none;
+}
+.btn-42 {
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  -webkit-mask-image: none;
+  padding: 1rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-42 span {
+  mix-blend-mode: difference;
+}
+.btn-42:before {
+  --thickness: 4px;
+  border: var(--thickness) solid #f26835;
+  border-radius: 999px;
+  content: "";
+  inset: calc(var(--thickness) * -1);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(1.3);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-42:hover:before {
+  opacity: 1;
+  transform: scale(1);
+}
+.btn-42:hover {
+  background-color: transparent;
+}
+/*登入介面 button*/
+
+
+
+/*登入口翻轉卡片 */
+.container1 {
+    display: flex;
+    justify-content: space-between;
+  }
+.card1 {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 20px 1px Gray;
+  }
+.card-title1 {
+    color: white;
+    text-align: center;
+    line-height: 2;
+    font-size: 16px;
+    text-shadow: 0 0 2px Lightgray;
+  }
+.card-txt1 {
+    color: WhiteSmoke;
+    height:100%;
+    width: 100%;
+    overflow: auto;
+    line-height: 16px;
+  }
+
+  .card1 {
+    transition: 1s;
+  }
+  .card-txt1 {
+    display: none;
+  }
+  .card1:hover {
+    transform: rotateY(180deg);
+  }
+  .card1:hover .card-title1 {
+    display: none;
+  }
+  .card1:hover .card-txt1 {
+    display: block;
+    transform: rotateY(180deg)
+  }
+
+  h4 {
+    text-align: right;
+    display: inline-block;
+    position: relative;
+    /* margin: 200px; */
+    top:300px;
+    left:0px;
+  }
+
+  .storeimg {
+    border-radius: 50%;
+    border: 5px solid #f26835;
+    margin: 50px;
+    display: block;
+    position: absolute;
+  }
+
+  .photoicon {
+    position: relative;
+    top:240px;
+    left:230px;
+    cursor: pointer;
+  }
+
+  #uploadBossPhoto {
+    position: absolute;
+    top:260px;
+    bottom:0px;
+    left:700px;
+    right:0px;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .menuimg {
+    width:336px;
+    height: 336px;
+  }
+
+  .menuPhoto1 {
+    position: relative;
+  }
+
+  .menuPhoto {
+    cursor: pointer;
+  }
+
+  /* 登入口button */
+.btn-40,
+.btn-40 *,
+.btn-40 :after,
+.btn-40 :before,
+.btn-40:after,
+.btn-40:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-40 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #f2b705;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 100%;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0;
+}
+.btn-40:disabled {
+  cursor: default;
+}
+.btn-40:-moz-focusring {
+  outline: auto;
+}
+.btn-40 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-40 [hidden] {
+  display: none;
+}
+.btn-40 {
+  border: 1px solid;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  overflow: hidden;
+  padding: 2rem 5rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-40 .new,
+.btn-40 .old {
+  transition: transform 0.2s;
+}
+.btn-40 .old {
+  display: grid;
+  inset: 0;
+  place-content: center;
+  position: absolute;
+}
+.btn-40:hover .old {
+  transform: translateY(100%);
+}
+.btn-40 .new {
+  background: #fff;
+  color: #000;
+  display: grid;
+  inset: 0;
+  place-content: center;
+  pointer-events: none;
+  position: absolute;
+  transform: translateX(-100%);
+}
+.btn-40:hover .new {
+  transform: translateX(0);
+}
+/* 登入口button */
+
+
+/*登入介面 圖片*/
+.box{
+    width: 180px;
+    height: 180px;
+    background: #aaa;
+  }
+  .cover-fit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+
+  .box{
+    width: 180px;
+    height: 180px;
+    background: #aaa;
+    overflow: hidden;
+    margin: 20px;
+  }
+  img{
+    transition: .5s;
+  }
+  .box:hover img{
+    transform: scale(1.2);
+  }
+  .cover-fit{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+/*登入介面 圖片*/
+
+
+/*登入介面 button*/
+.btn-42,
+.btn-42 *,
+.btn-42 :after,
+.btn-42 :before,
+.btn-42:after,
+.btn-42:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-42 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #f2b705;
+  background-image: none;
+  color: #f2b705;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 20px;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(black, #fff);
+  padding: 0;
+}
+.btn-42:disabled {
+  cursor: default;
+}
+.btn-42:-moz-focusring {
+  outline: auto;
+}
+.btn-42 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-42 [hidden] {
+  display: none;
+}
+.btn-42 {
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  font-weight: 900;
+  -webkit-mask-image: none;
+  padding: 1rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-42 span {
+  mix-blend-mode: difference;
+}
+.btn-42:before {
+  --thickness: 4px;
+  border: var(--thickness) solid #f26835;
+  border-radius: 999px;
+  content: "";
+  inset: calc(var(--thickness) * -1);
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transform: scale(1.3);
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-42:hover:before {
+  opacity: 1;
+  transform: scale(1);
+}
+.btn-42:hover {
+  background-color: transparent;
+}
+/*登入介面 button*/
+
+
+  /*登入口*/
+  @import url(https://fonts.googleapis.com/css?family=Raleway);
+* {
+    margin:0px;
+    padding:0px;
+    font-family: 'Raleway', sans-serif;
+    color:#333;
+}
+
+.card2 {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 20px 1px #f2b705;
+}
+
+body {
+    background-color:#ecf0f1;
+}
+#home {
+    width:100%;
+    height:92.8vh;
+    
+}
+.lr-wrapper {
+    max-width:50%;
+    height:500px;
+    margin-top:5%;
+}
+.lr-content {
+    height:500px;
+    width:400px;
+}
+.lr-head {
+    width:100%;
+    height:50px;
+}
+.lr-l_b {
+    width:49.8%;
+    height:50px;
+    float:left;
+    background-color:#f26835;
+    transition: background-color 0.8s ease;
+    cursor:pointer;
+}
+.lr-l_b > div {
+    height:7px;
+    width:100%;
+}
+.lr-l_b > span {
+    width:100%;
+    font-size:30px;
+    height:30px;
+    padding-top:5px;
+    color:white;
+    transition: color 0.8s ease;
+}
+.lr-r_b {
+    width:49.7%;
+    height:50px;
+    float:right;
+    transition: background-color 0.8s ease;
+    cursor:pointer;
+    background-color: #ecf0f1;
+}
+.lr-r_b > div {
+    height:7px;
+    width:100%;
+}
+.lr-r_b > span {
+    width:100%;
+    font-size:30px;
+    height:30px;
+    padding-top:5px;
+    transition: color 0.8s ease;
+}
+#l-f {
+    transition: display 1.8s ease;
+}
+.l-username {
+    width:94%;
+    height:40px;
+    margin-top:100px;
+    padding-left:20px;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    border:1px solid #b3b3b3;
+    transition:border 1.0s ease;
+}
+/* .l-username:focus {
+    border:1px solid #FF5252;
+} */
+
+.l-password {
+    width:94%;
+    height:40px;
+    margin-top:20px;
+    padding-left:20px;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    border:1px solid #b3b3b3;
+    transition:border 1.0s ease;
+}
+/* .l-password:focus {
+    border:1px solid #FF5252;
+} */
+.l-submit {
+    width:150px;
+    height:50px;
+    margin-top:20px;
+    border:none;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    background-color:#f26835;
+    color:white;
+    
+    cursor:pointer;
+}
+#r-f {
+    display:none;
+}
+.r-email {
+    width:94%;
+    height:40px;
+    margin-top:100px;
+    padding-left:20px;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    border:1px solid #b3b3b3;
+    transition:border 1.0s ease;
+}
+
+.r-username {
+    width:94%;
+    height:40px;
+    margin-top:20px;
+    padding-left:20px;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    border:1px solid #b3b3b3;
+     transition:border 1.0s ease;
+}
+.r-password {
+    width:94%;
+    height:40px;
+    margin-top:20px;
+    padding-left:20px;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    border:1px solid #b3b3b3;
+     transition:border 1.0s ease;
+}
+.r-submit {
+    width:150px;
+    height:50px;
+    margin-top:20px;
+    border:none;
+    outline:none;
+    font-size:25px;
+    font-family:Raleway;
+    background-color:#f26835;
+    color:white;
+    cursor:pointer;
+}
+/* .r  -password:focus {
+    border:1px solid #FF5252;
+}
+.r-username:focus {
+    border:1px solid #FF5252;
+}
+.r-email:focus {
+    border:1px solid #FF5252;
+} */
+.accent-text {
+    color: #e74c3c;
+    transition:color 1s;
+}
+
+/*燈入口選擇*/
+  
+  .card3 {
+    width: 300px;
+    height: 500px;
+    background-color: #ffffff;
+    -webkit-box-shadow: 0px 0px 50px -20px rgba(0, 0, 0, 0.25);
+            box-shadow: 0px 0px 50px -20px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+  }
+  
+  .card3 .card-image3 img {
+    background-size: cover;
+    width: 245px;
+    height: 225px;
+    border-radius: 10px;
+    margin: 15px;
+    overflow: hidden;
+  }
+
+  .card-image3:hover {
+       transition: .7s;
+       transform: scale(1.2,1.2);
+  }
+  
+  .card3 .card-title3 {
+    font-family: Balsamiq Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    margin: 10px;
+    color: #f2b705;
+  }
+  
+  .card3 .price3 {
+    font-family: Balsamiq Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 25px;
+    margin: 10px;
+    color: #000000;
+    margin-bottom: 30px;
+  }
+  
+  .card3 .card-button3 {
+    /* width: 150px;
+    height: 30px; */
+    background-color: #f2b705;
+    border-radius: 10px;
+    /* counter-increment: none; */
+    color: #FFFFFF;
+    /* padding: 12px 0px 18px 60px; */
+    /* display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex; */
+    /* margin: 14px; */
+    font-family: Balsamiq Sans;
+    font-style: normal;
+    font-weight: bold;
+  }
+  
+  .card3 .card-button3:hover {
+    background-color: green;
+    color: #ffffff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  /*# sourceMappingURL=style.css.map */
+
+  .myfav{
+    cursor: pointer;
+  }
+
+  .myfavimg{
+    max-width: 300px;
+    height: 250px;
+  }
+
+  .score {
+    /* border: 1px solid #f26835; */
+    border-radius: 10px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+    background-color: #e74c3c;
+  }
+
+    .heart:hover {
+      cursor: pointer;
+    }

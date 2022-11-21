@@ -1,0 +1,172 @@
+﻿
+@{
+    ViewBag.Title = "test";
+}
+
+<h2>test</h2>
+
+<div id="VuePage">
+    <section class="vh-60" style="background-color: #eee; margin:10px;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">基本資料註冊</p>
+
+                                    <form class="mx-1 mx-md-4">
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="text" id="UserName" class="form-control" />
+                                                <label class="form-label" for="form3Example1c">負責人</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-phone fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="email" id="UserPhone" class="form-control" />
+                                                <label class="form-label" for="form3Example3c">聯絡電話</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="email" id="UserEmail" class="form-control" />
+                                                <label class="form-label" for="form3Example3c">電子郵件</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="UserPwd" class="form-control" />
+                                                <label class="form-label" for="form3Example4c">密碼</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="UserPwdck" class="form-control" />
+                                                <label class="form-label" for="form3Example4cd">確認密碼</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                            <label class="form-check-label" for="form2Example3">
+                                                我同意收到餐車噗噗的<a href="#!">最新消息/通知!</a>
+                                            </label>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">餐車詳細資料</p>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-truck fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="CarName" class="form-control" />
+                                            <label class="form-label" for="form3Example1c">餐車名稱</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <button type="button" id="btnUpload" class="btn btn-primary btn-lg" onclick="Register()">註冊</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section scripts{
+    <script>
+
+        //public class SearchStoreCard {
+        //    //store
+        //    public int StoreID { get; set; }
+        //    public string Store_Name { get; set; }
+        //    public string Store_Class { get; set; }
+        //    public string Introduce { get; set; }
+        //    public string Picture { get; set; }
+        //    public string Phone { get; set; }
+
+        //    //StoreBusiness
+        //    public int CalendarID { get; set; }
+        //    public string Address_Area { get; set; }
+        //    public string Address_City { get; set; }
+        //    public string Address_Local { get; set; }
+        //    public string Store_Address { get; set; }
+        //    public string Punch_Start { get; set; }
+        //    public string Punch_End { get; set; }
+        //    public Nullable < bool > OnBusiness { get; set; }
+
+        //    //Customer_Favorite
+        //    public int CustomerFavoriteStoreID { get; set; }
+
+        //    //Messenger_Board
+        //    public Nullable < double > StarRating { get; set; }
+        //    public int ContentCount { get; set; }
+
+        //    //合併顯示
+        //    public string Punch_Time { get; set; }
+        //    public string Address_Detail { get; set; }
+        //}
+
+
+        function Register() {
+            let Name = $('#UserName').val();
+            let Phone = $('#UserPhone').val();
+            let Email = $('#UserEmail').val();
+            let Pwd = $('#UserPwd').val();
+            let PwdCk = $('#UserPwdck').val();
+            let CarName = $('#CarName').val();
+            var storecard = {
+                store1: { StoreID: 1, Store_Name: CarName, Phone: Phone, Introduce: '', Punch_Time: '12:00-16:00' },
+                store2:{ StoreID: 1, Store_Name: CarName, Phone: Phone, Introduce: '', Punch_Time: '12:00-16:00' }
+        };
+            console.log(storecard);
+            console.log(typeof storecard);
+            console.log(JSON.stringify(storecard));
+            console.log(typeof JSON.stringify(storecard));
+
+
+            $.ajax({
+                url: '@Url.Content("~/Search/test")',
+                method: 'Post',
+                dataType: 'json',
+                data: { searchIn: JSON.stringify(storecard) },
+                success: function (datas) {
+                    //if (datas.ErrMsg) {
+                    //    alert(datas.ErrMsg);
+                    //    return;
+                    //}
+                    //alert(datas.ResultMsg);
+                    alert("321");
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+
+
+        }
+
+    </script>
+    
+
+}

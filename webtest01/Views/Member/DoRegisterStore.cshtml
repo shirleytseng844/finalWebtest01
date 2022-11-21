@@ -1,0 +1,320 @@
+﻿
+@{
+    ViewBag.Title = "DoRegisterStore";
+}
+<div id="VuePage">
+    <section class="vh-60" style="background-color: #eee; margin:10px;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">基本資料註冊</p>
+
+                                    <form class="mx-1 mx-md-4">
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="text" id="UserName" class="form-control" />
+                                                <label class="form-label" for="form3Example1c">負責人</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fa fa-phone fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="email" id="UserPhone" class="form-control" />
+                                                <label class="form-label" for="form3Example3c">聯絡電話</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="email" id="UserEmail" class="form-control" />
+                                                <label class="form-label" for="form3Example3c">電子郵件</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="UserPwd" class="form-control" />
+                                                <label class="form-label" for="form3Example4c">密碼</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="UserPwdck" class="form-control" />
+                                                <label class="form-label" for="form3Example4cd">確認密碼</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                            <label class="form-check-label" for="form2Example3">
+                                                我同意收到餐車噗噗的<a href="#!">最新消息/通知!</a>
+                                            </label>
+                                        </div>
+
+                                    </form>
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">餐車詳細資料</p>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-truck fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="text" id="CarName" class="form-control" />
+                                            <label class="form-label" for="form3Example1c">餐車名稱</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-map-marker fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <p></p>
+                                            <div id="twzipcode"></div>
+                                            <p></p>
+                                            @*<select class="form-select border-3" style="margin-bottom:10px;">
+                                                    <option>請選擇縣市</option>
+                                                    <option>臺北市</option>
+                                                    <option>新北市</option>
+                                                    <option>桃園市</option>
+                                                    <option>臺中市</option>
+                                                    <option>臺南市</option>
+                                                    <option>高雄市</option>
+                                                </select>
+                                                <select class="form-select border-3" style="margin-bottom:10px;">
+                                                    <option>請選擇區域</option>
+                                                    <option>北區</option>
+                                                    <option>中西區</option>
+                                                    <option>東區</option>
+                                                    <option>南區</option>
+                                                    <option>安平區</option>
+                                                    <option>安南區</option>
+                                                </select>*@
+                                            <input type="text" id="address" class="form-control" placeholder="請輸入地址" />
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex flex-row align-items-center mb-4">
+                                        <i class="fa fa-picture-o fa-2x me-3 fa-fw" aria-hidden="true"></i>
+                                        <div class="form-outline flex-fill mb-0">
+                                            <input type="file" id="uploadFile" accept="image/png, image/jpeg"  />
+                                            <label class="form-label" for="form3Example1c">請上傳餐車圖片(限Jpg/Png)</label>
+                                            <p>
+                                                <img src="" id="CarPhoto">
+                                            </p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                <button type="button" id="btnUpload" class="btn btn-primary btn-lg" onclick="Register()">註冊</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section css{
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+}
+@section scripts{
+
+    <script src="~/Scripts/jquery.twzipcode.min.js"></script>
+    <script src="~/Scripts/twzipcode.js"></script>
+    <script>
+        $('#twzipcode').twzipcode({
+            'zipcodeIntoDistrict':true,
+            'css': [
+                'form-select border-3',
+                'form-select border-3'
+            ]
+
+        });
+        /*$("input[name='zipcode']").attr("readonly, true");*/
+        let uploadfile;
+
+
+
+        function upfile() {
+            uploadfile = document.getElementById('uploadFile').files[0];
+            let readFile = new FileReader();
+            readFile.readAsDataURL(uploadfile);
+            readFile.addEventListener('load', function () {
+                let image = document.getElementById('CarPhoto');
+                image.src = readFile.result;
+                image.style.maxWidth = "200px";
+                image.style.maxHeight = "200px";
+             })
+        }
+        function doFirst() {
+            // 跟 HTML 畫面產生關連，再建事件聆聽功能
+            document.getElementById('uploadFile').onchange = upfile;
+
+        }
+        window.addEventListener('load', doFirst);
+
+
+
+
+        function Register() {
+            var Name = $('#UserName').val().trim();
+            let Phone = $('#UserPhone').val();
+            let Email = $('#UserEmail').val();
+            let Pwd = $('#UserPwd').val();
+            let PwdCk = $('#UserPwdck').val();
+            let CarName = $('#CarName').val();
+            let county = $("select[name='county']").val();
+            let district = $("select[name='district']").val();
+            let address = $('#address').val();
+
+            if (Name == "" || Phone == "" || Email == "" || Pwd == "" || PwdCk == "" || CarName == "" || county == "" || address == "") {
+
+                alert("請填入完整資料/輸入欄不可空白");
+            } else {
+                if (Pwd == PwdCk) {
+                    const formData = new FormData();
+                    formData.append("Name", Name);
+                    formData.append("Phone", Phone);
+                    formData.append("Email" ,Email);
+                    formData.append("Pwd", Pwd);
+                    formData.append("CarName", CarName,);
+                    formData.append("county", county);
+                    formData.append("district", district);
+                    formData.append("address", address);
+
+
+                    //var _array = [{ Name: Name, Phone: Phone, Email: Email, Pwd: Pwd, CarName: CarName, county: county, district: district, zipcode: zipcode, address: address }];
+                    //var _Object = { RegisterInfo: _array };
+                    //var json = JSON.stringify(_Object);
+
+
+                    if (uploadfile != undefined) {
+
+                        formData.append("imageFile", uploadfile);
+
+                        $.ajax({
+                            url: '@Url.Content("~/Member/DoRegisterStore")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert("123");
+                            }
+                        });
+
+
+                    } else {
+                        $.ajax({
+                            url: '@Url.Content("~/Member/DoRegisterStore")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                alert(err.responseText + ',' + err.status);
+                            }
+                        });
+                    }
+
+                } else {
+                     alert("請確認密碼是否一致!");
+                }
+
+            }
+        }
+
+
+        @*$('uploadFile').val();
+
+        //https://ithelp.ithome.com.tw/articles/10095237
+        //http://n.sfs.tw/content/index/10047
+        //https://www.796t.com/content/1550081341.html
+//        https://www.fooish.com/jquery/ajax.html
+        //https://book.vue.tw/CH1/1-4-directive.html
+        //https://hao1229.github.io/2019/08/05/EcommercePractice5/
+        //https://ithelp.ithome.com.tw/articles/10226355
+        //https://github.com/essoduke/jQuery-TWzipcode
+
+
+
+        var VuePage = new Vue({
+            el: '#VuePage',
+            data: function () {
+                var data = { form: {} };
+                return data;
+            },
+
+            v- model="UserName"
+            methods: {
+                DoRegister: function () {
+                    var self = this;
+                    var postData = {};
+                    if (self.UserPwd == self.UserPwdCk) {
+                        postData['UserAccount'] = self.UserAccount;
+                        postData['UserPwd'] = self.UserPwd;
+                        postData['Name'] = self.UserName;
+                        postData['Phone'] = self.UserPhone;
+
+                        $.ajax({
+                            url: '@Url.Content("~/Member/DoRegister")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { inModel: postData },
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                $('#ErrorMsg').html(err.responseText);
+                                $('#ErrorAlert').modal('toggle');
+                            },
+                        });
+                    } else {
+                        alert("請確認密碼是否一致!");
+                    }
+                }
+            }
+        })*@
+
+
+    </script>
+
+
+}

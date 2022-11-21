@@ -1,0 +1,315 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<div id="VuePage">
+    <section class="vh-60" style="background-color: #eee; margin:10px;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">阿嘉昨天感冒</p>
+
+                                    <form class="mx-1 mx-md-4">
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="text" id="form3Example1c" class="form-control" v-model="form.UserName" />
+                                                <label class="form-label" for="form3Example1c">姓名</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="email" id="form3Example3c" class="form-control" v-model="form.UserAccount" />
+                                                <label class="form-label" for="form3Example3c">電子郵件</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="form3Example4c" class="form-control" v-model="form.UserPwd" />
+                                                <label class="form-label" for="form3Example4c">密碼</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="password" id="form3Example4cd" class="form-control" v-model="form.UserPwdCk" />
+                                                <label class="form-label" for="form3Example4cd">確認密碼</label>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div class="form-outline flex-fill mb-0">
+                                                <input type="text" id="form3Example4p" class="form-control" v-model="form.UserPhone" />
+                                                <label class="form-label" for="form3Example4c">電話</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                            <label class="form-check-label" for="form2Example3">
+                                                我同意收到餐車噗噗的<a href="#!">最新消息/通知!</a>
+                                            </label>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button type="button" class="btn btn-primary btn-lg" v-on:click="DoRegister">註冊</button>
+                                        </div>
+
+                                    </form>
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="~/Content/imgs/Roll02.jpg" class="img-fluid" alt="Sample image">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @*店家註冊預設
+    <div id="VuePage_Store">
+        <section class="vh-60" style="background-color: #eee; margin:10px;">
+            <div class="container h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-lg-12 col-xl-11">
+                        <div class="card text-black" style="border-radius: 25px;">
+                            <div class="card-body p-md-5">
+                                <div class="row justify-content-center">
+                                    <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+                                        <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4" style="color: #F2B705">阿嘉昨天感冒</p>
+                                        <form class="mx-1 mx-md-4">
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example1c" class="form-control" v-model="form.StoreName" />
+                                                    <label class="form-label" for="form3Example1c">店家名稱</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <select class="form-select border-0 py-3">
+                                                        <option selected>食物類別</option>
+                                                        <option value="1">飯</option>
+                                                        <option value="2">麵</option>
+                                                        <option value="3">火鍋</option>
+                                                        <option value="3">點心</option>
+                                                    </select>
+                                                    <label class="form-label" for="form3Example3c">餐車類別</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="email" id="form3Example3c" class="form-control" v-model="form.Ower_Name" />
+                                                    <label class="form-label" for="form3Example3c">負責人姓名</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="email" id="form3Example3c" class="form-control" v-model="form.StoreAccount" />
+                                                    <label class="form-label" for="form3Example3c">電子郵件</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="password" id="form3Example4c" class="form-control" v-model="form.StorePwd" />
+                                                    <label class="form-label" for="form3Example4c">密碼</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="password" id="form3Example4cd" class="form-control" v-model="form.StorePwdCk" />
+                                                    <label class="form-label" for="form3Example4cd">確認密碼</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example4p" class="form-control" v-model="form.StorePhone" />
+                                                    <label class="form-label" for="form3Example4c">電話</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <select class="form-select border-0 py-3">
+                                                        <option selected>食物類別</option>
+                                                        <option value="1">飯</option>
+                                                        <option value="2">麵</option>
+                                                        <option value="3">火鍋</option>
+                                                        <option value="3">點心</option>
+                                                    </select>
+                                                    <label class="form-label" for="form3Example3c">餐車註冊縣市</label>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-row align-items-center mb-4">
+                                                <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                                <div class="form-outline flex-fill mb-0">
+                                                    <input type="text" id="form3Example4p" class="form-control" v-model="form.StoreAdrres" />
+                                                    <label class="form-label" for="form3Example4c">詳細地址</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-check d-flex justify-content-center mb-5">
+                                                <input class="form-check-input me-2" type="checkbox" value="" id="form2Example3c" />
+                                                <label class="form-check-label" for="form2Example3">
+                                                    我同意收到餐車噗噗的<a href="#!">最新消息/通知!</a>
+                                                </label>
+                                            </div>
+
+                                            <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                                <button type="button" class="btn btn-primary btn-lg" v-on:click="DoRegister">註冊</button>
+                                            </div>
+
+                                        </form>
+
+                                    </div>
+                                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                        <img src="~/Content/imgs/Roll02.jpg" class="img-fluid" alt="Sample image">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+
+        <!--使用 Bootstrap Modal 樣式，當執行有錯誤時，顯示錯誤訊息-->
+        <div class="modal fade" id="ErrorAlert" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">錯誤訊息</h4>
+                    </div>
+                    <div class="modal-body" id="ErrorMsg" style="overflow-x:auto;width:100%;">
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+    </div>
+
+
+    @section scripts{
+        @*<script>
+                let pwd = document.getElementById("form3Example4c");
+                let pwd_ck = document.getElementById("form3Example4cd");
+                let btn = document.getElementsByClassName("btn");
+                btn.item[0
+            </script>*@
+        <script>
+         var VuePage = new Vue({
+            el: '#VuePage',
+            data: function () {
+                var data = { form: {} };
+                return data;
+            },
+            methods: {
+                DoRegister: function () {
+                    var self = this;
+                    var postData = {};
+                    if (self.form.UserPwd == self.form.UserPwdCk) {
+                        postData['UserAccount'] = self.form.UserAccount;
+                        postData['UserPwd'] = self.form.UserPwd;
+                        postData['Name'] = self.form.UserName;
+                        postData['Phone'] = self.form.UserPhone;
+
+                        $.ajax({
+                            url: '@Url.Content("~/Member/DoRegister")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { inModel: postData },
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                $('#ErrorMsg').html(err.responseText);
+                                $('#ErrorAlert').modal('toggle');
+                            },
+                        });
+                    } else {
+                        alert("請確認密碼是否一致!");
+                    }
+                }
+            }
+        })
+        </script>
+
+        @*<script>
+         var VuePage = new Vue({
+            el: '#VuePage_Store',
+            data: function () {
+                var data = { form: {} };
+                return data;
+            },
+            methods: {
+                DoRegisterStore: function () {
+                    var self = this;
+                    var postData = {};
+                    if (self.form.StorePwd == self.form.StorePwdCk) {
+                        postData['Email_Account'] = self.form.StoreAccount;
+                        postData['Password'] = self.form.StorePwd;
+                        postData['Store_Name'] = self.form.StoreName;
+                        postData['Phone'] = self.form.StorePhone;
+                        /*postData['Store_Class'] = self.form.UserPhone; 未加入*/
+                        postData['Owner_Name'] = self.form.Ower_Name;
+                        postData['Address_City'] = self.form.UserPwd;
+                        /*postData['Address_Local'] = self.form.StoreAdrres; 未加入*/
+
+
+                        $.ajax({
+                            url: '@Url.Content("~/Member/DoRegisterStore")',
+                            method: 'Post',
+                            dataType: 'json',
+                            data: { inModel: postData },
+                            success: function (datas) {
+                                if (datas.ErrMsg) {
+                                    alert(datas.ErrMsg);
+                                    return;
+                                }
+                                alert(datas.ResultMsg);
+                            },
+                            error: function (err) {
+                                $('#ErrorMsg').html(err.responseText);
+                                $('#ErrorAlert').modal('toggle');
+                            },
+                        });
+                    } else {
+                        alert("請確認密碼是否一致!");
+                    }
+                }
+            }
+        })
+        </script>*@
+    }

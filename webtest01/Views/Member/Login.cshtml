@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+
+<section class="ftco-section">
+    <div class="container">
+        <div class="row  justify-content-center">
+
+
+            <div class="lr-content card2" style="margin: 70px;">
+                <div class="lr-head">
+                    <div class="lr-l_b" id="login1" style="text-align:center;">
+                        <div></div>
+                        <span style="font-size:24px;">店家</span>
+                    </div>
+                    <div class="lr-r_b" id="register1" style="text-align:center">
+                        <div></div>
+                        <span style="font-size:24px;">一般用戶</span>
+                    </div>
+                </div>
+                <div class="lr-main">
+                    <div>
+                        @using (Ajax.BeginForm("DoLogin", "Member", new { id = "" }, new AjaxOptions { HttpMethod = "Post", OnComplete = "Success", OnFailure = "Fail" }, new { id = "r-f", enctype = "multipart/form-data" }))
+                        {
+                            <input type="text" class="l-username form-control border-2 py-3" id="Login_Email" name="Login_Email" placeholder="請輸入電子郵件" />
+                            <input type="password" class="l-password form-control border-2 py-3" id="Login_Pwd" name="Login_Pwd" placeholder="請輸入密碼" />
+                            <button type="submit" class="btn-42" style="margin-top: 25px;"><span>登入</span></button>
+                        }
+                    </div>
+                    <div>
+                        @using (Ajax.BeginForm("DoLoginStore", "Member", new { id = "" }, new AjaxOptions { HttpMethod ="Post",OnComplete = "Success",OnFailure = "Fail"}, new { id = "l-f", enctype = "multipart/form-data" }))
+                        {
+                            <input type="text" class="l-username form-control border-2 py-3" id="Login_StoreEmail" name="Login_StoreEmail" placeholder="請輸入電子郵件" />
+                            <input type="password" class="l-password form-control border-2 py-3" id="Login_StorePwd" name="Login_StorePwd" placeholder="請輸入密碼" />
+                            <button type="submit" class="btn-42" style="margin-top: 25px;"><span>登入</span></button>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script src="~/Scripts/projectJS/登入口.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        
+
+
+        function Success(e) {
+            //console.log(typeof e);
+            //console.log(e);
+            //console.log(typeof e.responseText);
+            //console.log(typeof e.responseJSON);
+            //console.log(e.responseText.ResultMsg);
+            //console.log(e.responseText.ErrMsg);
+            //console.log(e.responseJSON.ResultMsg);
+            //console.log(e.responseJSON.ErrMsg);
+            if (e.responseJSON.ErrMsg) {
+                alert(e.responseJSON.ErrMsg);
+                return;
+            }
+            alert(e.responseJSON.ResultMsg);
+            window.location.href = '@Url.Content("~/Home/Index")';
+            @*console.log(e.responseJSON.ResultMsg);
+            console.log("@Url.Action("Index","Home")");
+            window.location.href="@Url.Action("Index","Home")";*@
+            //location.href = "~/Home/Index.cshtml";
+        }
+        function Fail(e) {
+            alert("狀態碼: " + e.status + ",說明:" + e.statusText);
+        }
+    </script>
+}
